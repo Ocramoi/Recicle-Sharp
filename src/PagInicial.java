@@ -5,16 +5,21 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class PagInicial {
-    private JPanel panelInit;
+    private JPanel pnlInit;
     private JButton loginCadastroButton;
     private static JFrame frame;
 
+    /**
+     * Cria eventos de interação da página
+     *
+     * @author Marco Toledo
+     */
     public PagInicial() {
         loginCadastroButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                frame.setContentPane(new Login().panelLogin);
+                frame.setContentPane(new Login(frame).pnlLogin);
                 frame.pack();
             }
         });
@@ -65,8 +70,8 @@ public class PagInicial {
 
         iniciaEstiloUI();
 
-        frame.setMinimumSize(new Dimension(200,200));
-        frame.setContentPane(new PagInicial().panelInit);
+        frame.setMinimumSize(new Dimension(500,300));
+        frame.setContentPane(new PagInicial().pnlInit);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Login">
-  <grid id="27dc6" binding="panelLogin" layout-manager="FormLayout">
+  <grid id="27dc6" binding="pnlLogin" layout-manager="FormLayout">
     <rowspec value="center:d:grow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:d:noGrow"/>
@@ -111,7 +111,7 @@
           <text value="Entrar"/>
         </properties>
       </component>
-      <component id="4136a" class="javax.swing.JLabel" binding="cadastrar">
+      <component id="4136a" class="javax.swing.JLabel" binding="lblCadastrar">
         <constraints>
           <grid row="10" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
