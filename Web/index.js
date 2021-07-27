@@ -19,7 +19,9 @@ L.control.zoom({
     position: 'bottomleft'
 }).addTo(mapa);
 
-let reqsPontos = new Request("localhost:8080/data");
+let reqsPontos = new Request("http://127.0.0.1:8080/data");
 fetch(reqsPontos).then((e) => {
-    console.log(e.json());
+    e.json().then((T) => {
+        console.log(T);
+    })
 });
