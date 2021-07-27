@@ -14,20 +14,23 @@ public class DataHandler implements HttpHandler {
     }
 
     private void respostaJson(HttpExchange httpExchange, ArrayList<Ponto> pontos) throws IOException {
-        OutputStream oStream = httpExchange.getResponseBody();
         StringBuilder respostaStr = new StringBuilder();
 
-        respostaStr.append("{\n\t'httpCode': 200,\n\t'data': [");
+        respostaStr.append("{'httpCode': 200, 'data': [");
         for (Ponto p : pontos) {
             respostaStr.append("{");
             respostaStr.append(p.toJSON());
             respostaStr.append("}, ");
         }
-        respostaStr.append("]\n}");
+        respostaStr.append("] }");
 
         String respostaHttp = respostaStr.toString();
         byte[] byteSetResposta = respostaHttp.getBytes(StandardCharsets.UTF_8);
+        httpExchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+        httpExchange.getResponseHeaders().add("Content-type", "application/json");
         httpExchange.sendResponseHeaders(200, byteSetResposta.length);
+
+        OutputStream oStream = httpExchange.getResponseBody();
         oStream.write(byteSetResposta);
         oStream.flush();
         oStream.close();
