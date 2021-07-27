@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.plaf.nimbus.State;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -15,7 +16,9 @@ public class PagInicial {
     private static JFrame frame;
 
     private boolean entraConta() {
+        Usuario currUser = null;
         Connection con = null;
+        Connection dbCon = null;
         // Declara nova entrada de recursos
         ResourceBundle res = null;
         String userRetorno = null;
@@ -23,9 +26,11 @@ public class PagInicial {
         try {
             // Carrega recursos
             res = ResourceBundle.getBundle("LoginDB");
+            ResourceBundle dbRes = ResourceBundle.getBundle("ResourceDB");
 
             // Conecta à database
             con = DriverManager.getConnection("jdbc:sqlite:./Data/login.sqlite");
+            dbCon = DriverManager.getConnection("jdbc:sqlite:./Data/database.sqlite");
             // Cria query SQL
             Statement query = con.createStatement();
             query.setQueryTimeout(10);
@@ -45,6 +50,14 @@ public class PagInicial {
                 if (ps.executeUpdate() == 0)
                     throw new SQLException("Registro não atualizado!");
             }
+
+            Statement usrQuery = dbCon.createStatement();
+            usrQuery.setQueryTimeout(10);
+            ResultSet currUsrSet = usrQuery.executeQuery(String.format(dbRes.getString("LOGIN_LAST_USE"),userRetorno));
+            if(currUsrSet.next()){
+                currUser = new Usuario(currUsrSet);
+            }
+
         } catch (SQLException | ParseException throwables) {
             throwables.printStackTrace();
         } finally {
@@ -52,13 +65,16 @@ public class PagInicial {
             try {
                 assert con != null;
                 con.close();
+                assert dbCon != null;
+                dbCon.close();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
         }
 
-        if (userRetorno != null && dateRetorno != null) {
-            frame.setContentPane(new HubInit(frame,null).pnlHub);
+        if (userRetorno != null && dateRetorno != null && currUser !=null) {
+
+            frame.setContentPane(new HubInit(frame,currUser).pnlHub);
             frame.pack();
             return true;
         }
@@ -76,10 +92,10 @@ public class PagInicial {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-//                if (entraConta()) {
+                if (!entraConta()) {
                     frame.setContentPane(new Login(frame, pnlInit).pnlLogin);
                     frame.pack();
-//                }
+                }
             }
         });
     }
@@ -130,6 +146,8 @@ public class PagInicial {
         iniciaEstiloUI(false);
 
         frame.setMinimumSize(new Dimension(500,300));
+        frame.setMaximumSize(new Dimension(500,300));
+        frame.setResizable(false);
         frame.setContentPane(new PagInicial().pnlInit);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

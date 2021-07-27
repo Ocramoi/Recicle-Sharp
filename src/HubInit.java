@@ -6,7 +6,10 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.ResourceBundle;
 
 public class HubInit {
     private Usuario currUser;
@@ -42,11 +45,25 @@ public class HubInit {
     private JLabel lblErroAtualizar;
     private JButton butAtualizar;
     private JLabel labelNome;
+    private JPanel pnlHist;
 
     private JFrame frame;
 
     private final int MIN_FIELD_SIZE = 3,
             MAX_FIELD_SIZE = 256;
+
+    private void getHistory(){
+        ResourceBundle strs = ResourceBundle.getBundle("Strings");
+        ArrayList<Ponto> pontosFiltro = FuncoesDB.retornaPontos("usr", currUser.getUsr());
+        Collections.reverse(pontosFiltro);
+        pnlHist.setLayout(new BoxLayout(pnlHist, BoxLayout.Y_AXIS));
+        pnlHist.removeAll();
+        for(Ponto p: pontosFiltro){
+            JLabel tmp = new JLabel(String.format(strs.getString("COLETA_STR"), p.endereco,p.usuario,p.tipoStr(),p.situacaoStr(), p.quantidade, String.join(", ",p.diasStr()), p.horarios, p.latitude, p.longitude));
+            tmp.setHorizontalAlignment(SwingConstants.CENTER);
+            pnlHist.add(tmp);
+        }
+    }
 
     private void updateLayoutUser(){
         labelNome.setText("Olá, "+currUser.getNome()+" "+currUser.getSobrenome());
@@ -64,7 +81,7 @@ public class HubInit {
         if(!butAtualizar.isEnabled()) {
             return;
         }
-        
+
         boolean sucesso = FuncoesDB.atualizaUsuario(
                 txtNome.getText().trim(),
                 txtSobreNome.getText().trim(),
@@ -128,7 +145,7 @@ public class HubInit {
                 tipo = 'C';
                 break;
         }
-        String horarios = String.format("%s%s",
+        String horarios = String.format("%s:%s",
                 spnHora.getValue(), spnMin.getValue());
 
         String vals = txtPosicao.getText().split("@")[1],
@@ -226,6 +243,11 @@ public class HubInit {
         tpnlPontos.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent changeEvent) {
+                switch (tpnlPontos.getSelectedIndex()){
+                    case 2:
+                        getHistory();
+                        break;
+                }
             }
         });
 
@@ -237,8 +259,6 @@ public class HubInit {
 
                 String url = "https://www.google.com.br/maps/";
                 if (Desktop.isDesktopSupported()) {
-//                if (false) {
-                    System.out.println("ASAAAA");
                     Desktop desktop = Desktop.getDesktop();
                     try {
                         desktop.browse(new URI(url));
@@ -248,8 +268,7 @@ public class HubInit {
                 } else{
                     Runtime runtime = Runtime.getRuntime();
                     try {
-//                        Process p = runtime.exec("/usr/bin/xdg-open " + url);
-                        runtime.exec("/usr/bin/firefox " + url);
+                        Process p = runtime.exec("/usr/bin/xdg-open " + url);
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }

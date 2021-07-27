@@ -85,11 +85,11 @@ public class FuncoesDB {
             res = ResourceBundle.getBundle("ResourceDB");
 
             String queryStr = res.getString(resStr);
-            try (PreparedStatement ps = con.prepareStatement(queryStr)) {
-                if (campo != null && filtro != null) {
-                    ps.setString(1, campo);
-                    ps.setString(2, filtro);
-                }
+            if (campo != null && filtro != null) {
+                queryStr = String.format(queryStr,campo,filtro);
+            }
+
+            try (PreparedStatement ps = con.prepareStatement(queryStr)){
                 ResultSet pesq = ps.executeQuery();
                 while (pesq.next()) {
                     String usr = pesq.getString("usr"),

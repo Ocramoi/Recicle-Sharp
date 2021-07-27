@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Ponto {
     public String usuario = null,
             endereco = null;
-    public String[][] horarios;
+    public String horarios;
     public char tipo = ' ',
             situacao = ' ';
     public boolean[] dias = new boolean[7];
@@ -88,18 +88,7 @@ public class Ponto {
         this.usuario = usuario;
         this.endereco = endereco;
 
-        String[] entradasHorario = horarios.split(",");
-        this.horarios = new String[entradasHorario.length/2][2];
-        for (int i = 0; i < this.horarios.length; ++i) {
-            this.horarios[i][0] = String.format("%s:%s",
-                    entradasHorario[2*i].substring(0, 2),
-                    entradasHorario[2*i].substring(2, 4)
-            );
-            this.horarios[i][1] = String.format("%s:%s",
-                    entradasHorario[2*i + 1].substring(0, 2),
-                    entradasHorario[2*i + 1].substring(2, 4)
-            );
-        }
+        this.horarios = horarios;
 
         this.tipo = tipo.charAt(0);
         this.situacao = situacao.charAt(0);
@@ -117,9 +106,6 @@ public class Ponto {
         StringBuilder horariosStr = new StringBuilder("["),
                 diasStr = new StringBuilder("[");
 
-        for (String[] tupla : this.horarios) {
-            horariosStr.append("['").append(tupla[0]).append("', '").append(tupla[1]).append("], ");
-        }
         horariosStr.append("]");
 
         for (String dia : diasStr()) {
