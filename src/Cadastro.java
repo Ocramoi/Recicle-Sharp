@@ -29,6 +29,9 @@ public class Cadastro {
     private JPasswordField passPswrd;
     private JPasswordField passConfPswrd;
     private JButton butCad;
+    private JLabel lblErro;
+
+    private JFrame frame;
 
     /**
      * Converte string de senha para BigInt por hashing MD5
@@ -92,66 +95,30 @@ public class Cadastro {
         return conf;
     }
 
-    /**
-     * Trata entrada de campos e insere no banco de dados com tais valores.
-     *
-     * @author Marco Toledo
-     * @return boolean : Sucesso de inserção
-     */
-    private boolean fazCadastro() {
-        // Declara nova conexão
-        Connection con = null;
-        // Declara nova entrada de recursos
-        ResourceBundle res = null;
-        // Auxiliar de retorno
-        boolean ret = true;
-        try {
-            // Carrega recursos
-            res = ResourceBundle.getBundle("ResourceDB");
-            // Lê e trata campos
-            String nome = txtNome.getText().trim(),
-                    sobre = txtSobreNome.getText().trim(),
-                    usr = txtUser.getText().trim(),
-                    email = fTxtEmail.getText().trim();
-            // Cria hash de senha lida
-            BigInteger pass = criptoPass(passPswrd.getPassword());
+    private void cadastra() {
+        boolean sucesso = FuncoesDB.cadastroUsuario(
+                txtNome.getText().trim(),
+                txtSobreNome.getText().trim(),
+                txtUser.getText().trim(),
+                fTxtEmail.getText().trim(),
+                FuncoesDB.hashPass(passPswrd.getPassword())
+        );
 
-            // Conecta à database
-            con = DriverManager.getConnection("jdbc:sqlite:./Data/database.sqlite");
-            // Cria query SQL
-            Statement query = con.createStatement();
-            query.setQueryTimeout(10);
-
-            // Executa query com base nos recursos
-            query.execute(String.format(res.getString("INSERT_STR"),
-                    nome,
-                    sobre,
-                    usr,
-                    email,
-                    pass));
-        } catch (SQLException | MissingResourceException throwables) {
-            // Confere erro de inserção / conexão
-            throwables.printStackTrace();
-            ret = false;
-        } finally {
-            // Fecha conexão à database
-            try {
-                assert con != null;
-                con.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }
-
-        return ret;
+        if (sucesso) {
+            frame.setContentPane(new Login(frame).pnlLogin);
+            frame.pack();
+        } else
+            lblErro.setVisible(true);
     }
 
-    public Cadastro() {
+    public Cadastro(JFrame frame) {
+        this.frame = frame;
+
         butCad.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                fazCadastro();
+                cadastra();
             }
         });
         txtNome.addKeyListener(new KeyAdapter() {

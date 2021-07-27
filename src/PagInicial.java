@@ -2,12 +2,68 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.ResourceBundle;
 
 public class PagInicial {
     private JPanel pnlInit;
     private JButton loginCadastroButton;
     private static JFrame frame;
+
+    private boolean entraConta() {
+        Connection con = null;
+        // Declara nova entrada de recursos
+        ResourceBundle res = null;
+        String userRetorno = null;
+        Date dateRetorno = null;
+        try {
+            // Carrega recursos
+            res = ResourceBundle.getBundle("LoginDB");
+
+            // Conecta à database
+            con = DriverManager.getConnection("jdbc:sqlite:./Data/login.sqlite");
+            // Cria query SQL
+            Statement query = con.createStatement();
+            query.setQueryTimeout(10);
+            ResultSet pesq = query.executeQuery(res.getString("SELECT_LOGIN"));
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Timestamp curTime = new Timestamp(System.currentTimeMillis());
+            String curDate = dateFormat.format(curTime);
+
+            while (pesq.next()) {
+                userRetorno = pesq.getString("usr");
+                dateRetorno = dateFormat.parse(pesq.getString("lastLogin"));
+            }
+
+            try (PreparedStatement ps = con.prepareStatement(res.getString("UPDATE_LAST"))) {
+                ps.setString(1, curDate);
+                if (ps.executeUpdate() == 0)
+                    throw new SQLException("Registro não atualizado!");
+            }
+        } catch (SQLException | ParseException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            // Fecha conexão à database
+            try {
+                assert con != null;
+                con.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+
+        if (userRetorno != null && dateRetorno != null) {
+            frame.setContentPane(new HubInit(frame).pnlHub);
+            frame.pack();
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Cria eventos de interação da página
@@ -19,8 +75,10 @@ public class PagInicial {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                frame.setContentPane(new Login(frame).pnlLogin);
-                frame.pack();
+                if (!entraConta()) {
+                    frame.setContentPane(new Login(frame).pnlLogin);
+                    frame.pack();
+                }
             }
         });
     }

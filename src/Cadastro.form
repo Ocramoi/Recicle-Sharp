@@ -19,6 +19,8 @@
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:d:grow"/>
     <colspec value="fill:10pt:noGrow"/>
     <colspec value="fill:d:noGrow"/>
@@ -170,7 +172,7 @@
       </vspacer>
       <vspacer id="73fe8">
         <constraints>
-          <grid row="18" column="1" row-span="1" col-span="4" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="20" column="1" row-span="1" col-span="4" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
       </vspacer>
@@ -180,6 +182,19 @@
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties/>
+      </component>
+      <component id="2aff" class="javax.swing.JLabel" binding="lblErro">
+        <constraints>
+          <grid row="18" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <enabled value="true"/>
+          <foreground color="-43691"/>
+          <horizontalAlignment value="0"/>
+          <text value="Erro no cadastro! Por favor tente novamente."/>
+          <visible value="false"/>
+        </properties>
       </component>
     </children>
   </grid>

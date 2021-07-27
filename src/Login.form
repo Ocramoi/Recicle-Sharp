@@ -13,6 +13,8 @@
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:d:grow"/>
     <colspec value="fill:d:grow"/>
     <colspec value="left:4dlu:noGrow"/>
@@ -50,7 +52,7 @@
           <text value="Usuário"/>
         </properties>
       </component>
-      <component id="49eb3" class="javax.swing.JTextField" binding="entradaUser">
+      <component id="49eb3" class="javax.swing.JTextField" binding="txtUser">
         <constraints>
           <grid row="4" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -79,7 +81,7 @@
       </vspacer>
       <vspacer id="8c7bb">
         <constraints>
-          <grid row="12" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="14" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
       </vspacer>
@@ -92,7 +94,7 @@
           <text value="Senha"/>
         </properties>
       </component>
-      <component id="1bce1" class="javax.swing.JPasswordField" binding="entradaSenha">
+      <component id="1bce1" class="javax.swing.JPasswordField" binding="passPswrd">
         <constraints>
           <grid row="6" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -103,21 +105,32 @@
       </component>
       <component id="24178" class="javax.swing.JButton" binding="butLogin">
         <constraints>
-          <grid row="8" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
+          <enabled value="false"/>
           <label value="Entrar"/>
           <text value="Entrar"/>
         </properties>
       </component>
       <component id="4136a" class="javax.swing.JLabel" binding="lblCadastrar">
         <constraints>
-          <grid row="10" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="12" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
           <text value="&lt;html&gt;Ainda não cadastrado? &lt;u&gt;Cadastre-se aqui&lt;/u&gt;&lt;/html&gt;"/>
+        </properties>
+      </component>
+      <component id="7200" class="javax.swing.JLabel" binding="lblErro">
+        <constraints>
+          <grid row="8" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <text value="Erro no login! Tente novamente"/>
+          <visible value="false"/>
         </properties>
       </component>
     </children>
