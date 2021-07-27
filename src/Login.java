@@ -14,6 +14,7 @@ public class Login {
     private JButton butLogin;
     private JLabel lblCadastrar;
     private JLabel lblErro;
+    private JButton voltarButton;
 
     private JFrame frame;
 
@@ -62,7 +63,7 @@ public class Login {
         }
     }
 
-    public Login(JFrame frame) {
+    public Login(JFrame frame, JPanel previous_panel) {
         this.frame = frame;
 
         lblCadastrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -70,7 +71,15 @@ public class Login {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                frame.setContentPane(new Cadastro(frame).pnlCadastro);
+                frame.setContentPane(new Cadastro(frame, pnlLogin).pnlCadastro);
+                frame.pack();
+            }
+        });
+        voltarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                frame.setContentPane(previous_panel);
                 frame.pack();
             }
         });
