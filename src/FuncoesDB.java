@@ -10,15 +10,59 @@ import java.util.ResourceBundle;
 
 public class FuncoesDB {
     public static boolean criaPonto(String usr,
-                                    String tipo,
+                                    char tipo,
                                     String endereco,
                                     String dias,
                                     String horarios,
-                                    String situacao,
+                                    char situacao,
+                                    int qnt,
                                     float latitude,
                                     float longitude) {
+        // Declara nova conexão
+        Connection con = null;
+        // Declara nova entrada de recursos
+        ResourceBundle res = null;
+        // Auxiliar de retorno
         boolean ret = false;
-        
+        try {
+            // Carrega recursos
+            res = ResourceBundle.getBundle("ResourceDB");
+
+            // Conecta à database
+            con = DriverManager.getConnection("jdbc:sqlite:./Data/database.sqlite");
+            // Cria query SQL
+            Statement query = con.createStatement();
+            query.setQueryTimeout(10);
+
+            // Executa query com base nos recursos
+            try (PreparedStatement ps = con.prepareStatement(res.getString("INSERT_PONTO"))) {
+                ps.setString(1, usr);
+                ps.setString (2, String.valueOf(tipo));
+                ps.setString(3, endereco);
+                ps.setInt(4, qnt);
+                ps.setString(5, dias);
+                ps.setString(6, horarios);
+                ps.setString(7, String.valueOf(situacao));
+                ps.setFloat(8, latitude);
+                ps.setFloat(9, longitude);
+
+                ps.executeUpdate();
+            }
+
+            ret = true;
+        } catch (SQLException | MissingResourceException throwables) {
+            // Confere erro de inserção / conexão
+            throwables.printStackTrace();
+        } finally {
+            // Fecha conexão à database
+            try {
+                assert con != null;
+                con.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+
         return ret;
     }
 
