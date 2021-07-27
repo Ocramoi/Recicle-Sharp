@@ -23,8 +23,11 @@ public class Login {
     }
 
     private void logUsr() {
-        String usrRegistrado = FuncoesDB.loginUsuario(txtUser.getText(), passPswrd.getPassword());
-        if (usrRegistrado.equals("")) {
+        if(!butLogin.isEnabled()){
+            return;
+        }
+        Usuario usrRegistrado = FuncoesDB.loginUsuario(txtUser.getText(), passPswrd.getPassword());
+        if (usrRegistrado == null) {
             lblErro.setVisible(true);
             return;
         }
@@ -43,11 +46,11 @@ public class Login {
 
             // Executa query com base nos recursos
             try (PreparedStatement ps = con.prepareStatement("INSERT INTO login (usr, lastLogin) VALUES (?, ?)")) {
-                ps.setString(1, usrRegistrado);
+                ps.setString(1, usrRegistrado.getUsr());
                 ps.setString(2, curDate);
                 ps.executeUpdate();
             }
-            frame.setContentPane(new HubInit(frame).pnlHub);
+            frame.setContentPane(new HubInit(frame,usrRegistrado).pnlHub);
             frame.pack();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -129,12 +129,12 @@ public class FuncoesDB {
         return selectPontos("TODOS_PONTOS", null, null);
     }
 
-    public static String loginUsuario(String usr, char[] pass) {
+    public static Usuario loginUsuario(String usr, char[] pass) {
         // Declara nova conexão
         Connection con = null;
         // Declara nova entrada de recursos
         ResourceBundle res = null;
-        String userRetorno = "";
+        Usuario userRetorno = null;
         try {
             // Carrega recursos
             res = ResourceBundle.getBundle("ResourceDB");
@@ -149,8 +149,9 @@ public class FuncoesDB {
             ResultSet pesq = query.executeQuery(String.format(res.getString("LOGIN_STR"),
                     usr,
                     hashPass(pass)));
-            while (pesq.next())
-                userRetorno = pesq.getString("usr");
+            if (pesq.next()) {
+                userRetorno = new Usuario(pesq);
+            }
         } catch (SQLException | MissingResourceException throwables) {
             // Confere erro de inserção / conexão
             throwables.printStackTrace();
@@ -230,6 +231,51 @@ public class FuncoesDB {
                     usr,
                     email,
                     pass));
+        } catch (SQLException | MissingResourceException throwables) {
+            // Confere erro de inserção / conexão
+            throwables.printStackTrace();
+            ret = false;
+        } finally {
+            // Fecha conexão à database
+            try {
+                assert con != null;
+                con.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+
+        return ret;
+    }
+
+    public static boolean atualizaUsuario(String nome,
+                                          String sobre,
+                                          String usr,
+                                          String email,
+                                          BigInteger pass) {
+        // Declara nova conexão
+        Connection con = null;
+        // Declara nova entrada de recursos
+        ResourceBundle res = null;
+        // Auxiliar de retorno
+        boolean ret = true;
+        try {
+            // Carrega recursos
+            res = ResourceBundle.getBundle("ResourceDB");
+
+            // Conecta à database
+            con = DriverManager.getConnection("jdbc:sqlite:./Data/database.sqlite");
+            // Cria query SQL
+            Statement query = con.createStatement();
+            query.setQueryTimeout(10);
+
+            // Executa query com base nos recursos
+            query.execute(String.format(res.getString("UPDATE_STR"),
+                    nome,
+                    sobre,
+                    email,
+                    pass,
+                    usr));
         } catch (SQLException | MissingResourceException throwables) {
             // Confere erro de inserção / conexão
             throwables.printStackTrace();

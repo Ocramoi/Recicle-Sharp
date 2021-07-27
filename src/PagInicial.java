@@ -58,7 +58,7 @@ public class PagInicial {
         }
 
         if (userRetorno != null && dateRetorno != null) {
-            frame.setContentPane(new HubInit(frame).pnlHub);
+            frame.setContentPane(new HubInit(frame,null).pnlHub);
             frame.pack();
             return true;
         }
@@ -76,10 +76,10 @@ public class PagInicial {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if (entraConta()) {
+//                if (entraConta()) {
                     frame.setContentPane(new Login(frame, pnlInit).pnlLogin);
                     frame.pack();
-                }
+//                }
             }
         });
     }
@@ -91,7 +91,7 @@ public class PagInicial {
      * @author Marco Toledo
      * @return boolean : sucesso de alteração
      */
-    private static boolean iniciaEstiloUI() {
+    private static boolean iniciaEstiloUI(boolean useGTKStyleIfAvailable) {
         // Contabiliza erro de alteração
         boolean retorno = true;
 
@@ -102,7 +102,7 @@ public class PagInicial {
 
         // Caso possível, usa estilo de sistema com GTK+
         try {
-            if (estilos.contains("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"))
+            if (useGTKStyleIfAvailable && estilos.contains("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"))
                 UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
             else
                 UIManager.setLookAndFeel(estilos.get(0));
@@ -127,10 +127,11 @@ public class PagInicial {
     public static void main(String[] args) {
         frame = new JFrame("Recicle#");
 
-        iniciaEstiloUI();
+        iniciaEstiloUI(false);
 
         frame.setMinimumSize(new Dimension(500,300));
         frame.setContentPane(new PagInicial().pnlInit);
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

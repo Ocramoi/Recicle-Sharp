@@ -97,6 +97,9 @@ public class Cadastro {
     }
 
     private void cadastra() {
+        if(!butCad.isEnabled()){
+            return;
+        }
         boolean sucesso = FuncoesDB.cadastroUsuario(
                 txtNome.getText().trim(),
                 txtSobreNome.getText().trim(),
