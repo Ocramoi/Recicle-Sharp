@@ -76,8 +76,8 @@ public class PagInicial {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if (!entraConta()) {
-                    frame.setContentPane(new Login(frame).pnlLogin);
+                if (entraConta()) {
+                    frame.setContentPane(new Login(frame, pnlInit).pnlLogin);
                     frame.pack();
                 }
             }

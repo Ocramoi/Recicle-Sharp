@@ -30,7 +30,8 @@ public class Cadastro {
     private JPasswordField passConfPswrd;
     private JButton butCad;
     private JLabel lblErro;
-
+    private JButton voltarButton;
+    private JPanel previous_panel;
     private JFrame frame;
 
     /**
@@ -105,20 +106,28 @@ public class Cadastro {
         );
 
         if (sucesso) {
-            frame.setContentPane(new Login(frame).pnlLogin);
+            frame.setContentPane(previous_panel);
             frame.pack();
         } else
             lblErro.setVisible(true);
     }
 
-    public Cadastro(JFrame frame) {
+    public Cadastro(JFrame frame, JPanel previous_panel) {
         this.frame = frame;
-
+        this.previous_panel = previous_panel;
         butCad.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 cadastra();
+            }
+        });
+        voltarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                frame.setContentPane(previous_panel);
+                frame.pack();
             }
         });
         txtNome.addKeyListener(new KeyAdapter() {

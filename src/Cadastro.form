@@ -153,17 +153,6 @@
         </constraints>
         <properties/>
       </component>
-      <component id="f0c71" class="javax.swing.JButton" binding="butCad">
-        <constraints>
-          <grid row="16" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-          <forms/>
-        </constraints>
-        <properties>
-          <enabled value="false"/>
-          <font size="22"/>
-          <text value="Cadastrar"/>
-        </properties>
-      </component>
       <vspacer id="7546b">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="4" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
@@ -194,6 +183,26 @@
           <horizontalAlignment value="0"/>
           <text value="Erro no cadastro! Por favor tente novamente."/>
           <visible value="false"/>
+        </properties>
+      </component>
+      <component id="f0c71" class="javax.swing.JButton" binding="butCad">
+        <constraints>
+          <grid row="16" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <enabled value="false"/>
+          <font size="22"/>
+          <text value="Cadastrar"/>
+        </properties>
+      </component>
+      <component id="ddb85" class="javax.swing.JButton" binding="voltarButton" default-binding="true">
+        <constraints>
+          <grid row="16" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Voltar"/>
         </properties>
       </component>
     </children>
