@@ -33,11 +33,7 @@ public class Servidor extends Thread {
         assert server != null;
 
         server.createContext("/data", new DataHandler());
-        server.setExecutor(
-                Executors.newFixedThreadPool(
-                        Runtime.getRuntime().availableProcessors()
-                )
-        );
+        server.setExecutor(null);
         server.start();
         System.out.println("Servidor inicializado na porta " +
                 PORTA +

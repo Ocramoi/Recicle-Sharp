@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Ponto {
@@ -46,6 +47,28 @@ public class Ponto {
         return retorno;
     }
 
+    public String[] diasStr() {
+        ArrayList<String> diasFull = new ArrayList<>();
+        String[] diasSemana = {
+                "Domingo",
+                "Segunda-feira",
+                "Terça-feira",
+                "Quarta-feira",
+                "Quinta-feira",
+                "Sexta-feira",
+                "Sábado"
+        };
+        for (int i = 0; i < 7; ++i) {
+            if (this.dias[i])
+                diasFull.add(diasSemana[i]);
+        }
+
+        String[] arRetorno = new String[diasFull.size()];
+        for (int i = 0; i < arRetorno.length; ++i)
+            arRetorno[i] = diasFull.get(i);
+        return arRetorno;
+    }
+
     public Ponto(String usuario,
                  String tipo,
                  String endereco,
@@ -82,6 +105,8 @@ public class Ponto {
         this.tipo = tipo.charAt(0);
         this.situacao = situacao.charAt(0);
         this.quantidade = qnt;
+        this.latitude = latitude;
+        this.longitude = longitude;
 
         assert dias.length() == 7;
         this.dias = new boolean[7];
@@ -90,6 +115,21 @@ public class Ponto {
     }
 
     public String toJSON() {
+        StringBuilder horariosStr = new StringBuilder("["),
+                diasStr = new StringBuilder("[");
+
+        for (String[] tupla : this.horarios) {
+            horariosStr.append("['").append(tupla[0]).append("', '").append(tupla[1]).append("], ");
+        }
+        horariosStr.append("]");
+
+        for (String dia : diasStr()) {
+            diasStr.append("'");
+            diasStr.append(dia);
+            diasStr.append("', ");
+        }
+        diasStr.append("]");
+
         return String.format(
                 "'usr': '%s'," +
                         "'tipoResiduo': '%s', " +
@@ -104,8 +144,8 @@ public class Ponto {
                 tipoStr(),
                 this.endereco,
                 this.quantidade,
-                Arrays.toString(this.dias),
-                Arrays.deepToString(this.horarios),
+                diasStr,
+                horariosStr,
                 situacaoStr(),
                 this.latitude,
                 this.longitude

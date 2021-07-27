@@ -3,6 +3,7 @@ import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class DataHandler implements HttpHandler {
@@ -16,17 +17,18 @@ public class DataHandler implements HttpHandler {
         OutputStream oStream = httpExchange.getResponseBody();
         StringBuilder respostaStr = new StringBuilder();
 
-        respostaStr.append("{\n'httpCode': 200,\n'data': [");
+        respostaStr.append("{\n\t'httpCode': 200,\n\t'data': [");
         for (Ponto p : pontos) {
             respostaStr.append("{");
             respostaStr.append(p.toJSON());
-            respostaStr.append("}");
+            respostaStr.append("}, ");
         }
         respostaStr.append("]\n}");
 
         String respostaHttp = respostaStr.toString();
-        httpExchange.sendResponseHeaders(200, respostaHttp.length());
-        oStream.write(respostaHttp.getBytes());
+        byte[] byteSetResposta = respostaHttp.getBytes(StandardCharsets.UTF_8);
+        httpExchange.sendResponseHeaders(200, byteSetResposta.length);
+        oStream.write(byteSetResposta);
         oStream.flush();
         oStream.close();
     }

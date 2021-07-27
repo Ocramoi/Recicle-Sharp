@@ -71,6 +71,7 @@ public class PagInicial {
      * @author Marco Toledo
      */
     public PagInicial() {
+        new Servidor().start();
         loginCadastroButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

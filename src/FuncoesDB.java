@@ -9,6 +9,19 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class FuncoesDB {
+    public static boolean criaPonto(String usr,
+                                    String tipo,
+                                    String endereco,
+                                    String dias,
+                                    String horarios,
+                                    String situacao,
+                                    float latitude,
+                                    float longitude) {
+        boolean ret = false;
+        
+        return ret;
+    }
+
     private static ArrayList<Ponto> selectPontos(String resStr,
                                                  String campo,
                                                  String filtro) {
