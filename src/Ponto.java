@@ -103,16 +103,18 @@ public class Ponto {
     }
 
     public String toJSON() {
-        StringBuilder horariosStr = new StringBuilder("["),
-                diasStr = new StringBuilder("[");
+        StringBuilder diasStr = new StringBuilder("[");
 
-        horariosStr.append("]");
-
-        for (String dia : diasStr()) {
+        String[] dS = diasStr();
+        for (int i = 0; i < dS.length - 1; ++i) {
             diasStr.append("'");
-            diasStr.append(dia);
+            diasStr.append(dS[i]);
             diasStr.append("', ");
         }
+        diasStr.append("'");
+        diasStr.append(dS[dS.length - 1]);
+        diasStr.append("'");
+
         diasStr.append("]");
 
         return String.format(
@@ -130,7 +132,7 @@ public class Ponto {
                 this.endereco,
                 this.quantidade,
                 diasStr,
-                horariosStr,
+                "[]",
                 situacaoStr(),
                 this.latitude,
                 this.longitude
