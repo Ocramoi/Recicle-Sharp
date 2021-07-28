@@ -182,7 +182,7 @@ public class HubInit {
         strDias += (sabadoCheckBox.isSelected() ? 'S' : 'N');
 
         char tipo = ' ';
-        switch (cmbTipo.getSelectedIndex()) {
+        switch (cmbTipoInsercao.getSelectedIndex()) {
             case 0:
                 tipo = 'E';
                 break;
