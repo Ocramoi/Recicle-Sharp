@@ -207,18 +207,6 @@ public class HubInit {
         float lat = Float.parseFloat(latStr),
                 lon = Float.parseFloat(longStr);
 
-        System.out.printf("%s %s %s %s %s %s %s %s %s%n",
-                FuncoesLogin.usuarioLocal(),
-                tipo,
-                txtEndereco.getText(),
-                strDias,
-                horarios,
-                'P',
-                (Integer) spnPeso.getValue(),
-                lat,
-                lon
-                );
-
         boolean r = FuncoesDB.criaPonto(
                 FuncoesLogin.usuarioLocal(),
                 tipo,
