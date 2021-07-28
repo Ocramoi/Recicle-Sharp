@@ -41,7 +41,6 @@ public class PagInicial {
      * da lista de sistema caso GTK+ não disponível.
      *
      * @return boolean : sucesso de alteração
-     * @author Marco Toledo
      */
     private static boolean iniciaEstiloUI(boolean useGTKStyleIfAvailable) {
         // Contabiliza erro de alteração
@@ -74,7 +73,6 @@ public class PagInicial {
      * Inicializa frame de início
      *
      * @param args : argumentos de execução
-     * @author Marco Toledo
      */
     public static void main(String[] args) {
         frame = new JFrame("Recicle#");
