@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class DataHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
-        ArrayList<Ponto> pontos = FuncoesDB.retornaPontos();
+        ArrayList<Ponto> pontos = FuncoesDB.retornaPontos("situacao", "P");
         respostaJson(httpExchange, pontos);
     }
 
