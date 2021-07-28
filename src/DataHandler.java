@@ -16,12 +16,18 @@ public class DataHandler implements HttpHandler {
     private void respostaJson(HttpExchange httpExchange, ArrayList<Ponto> pontos) throws IOException {
         StringBuilder respostaStr = new StringBuilder();
 
-        respostaStr.append("{'httpCode': 200, 'data': [");
-        for (Ponto p : pontos) {
+        respostaStr.append("{\"httpCode\": 200, \"data\": [");
+        for (int i = 0; i < pontos.size() - 1; ++i) {
             respostaStr.append("{");
-            respostaStr.append(p.toJSON());
+            respostaStr.append(pontos.get(i).toJSON());
             respostaStr.append("}, ");
         }
+        if (pontos.size() > 0) {
+            respostaStr.append("{");
+            respostaStr.append(pontos.get(pontos.size() - 1).toJSON());
+            respostaStr.append("}");
+        }
+
         respostaStr.append("] }");
 
         String respostaHttp = respostaStr.toString();

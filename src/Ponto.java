@@ -107,32 +107,34 @@ public class Ponto {
 
         String[] dS = diasStr();
         for (int i = 0; i < dS.length - 1; ++i) {
-            diasStr.append("'");
+            diasStr.append("\"");
             diasStr.append(dS[i]);
-            diasStr.append("', ");
+            diasStr.append("\", ");
         }
-        diasStr.append("'");
-        diasStr.append(dS[dS.length - 1]);
-        diasStr.append("'");
+        if (dS.length > 0) {
+            diasStr.append("\"");
+            diasStr.append(dS[dS.length - 1]);
+            diasStr.append("\"");
+        }
 
         diasStr.append("]");
 
         return String.format(
-                "'usr': '%s'," +
-                        "'tipoResiduo': '%s', " +
-                        "'endereco': '%s', " +
-                        "'qnt': %s, " +
-                        "'dias': %s, " +
-                        "'horarios': %s, " +
-                        "'situacao': '%s', " +
-                        "'latitude': %s, " +
-                        "'longitude': %s",
+                "\"usr\": \"%s\", " +
+                        "\"tipoResiduo\": \"%s\", " +
+                        "\"endereco\": \"%s\", " +
+                        "\"qnt\": %s, " +
+                        "\"dias\": %s, " +
+                        "\"horarios\": \"%s\", " +
+                        "\"situacao\": \"%s\", " +
+                        "\"latitude\": %s, " +
+                        "\"longitude\": %s",
                 this.usuario,
                 tipoStr(),
                 this.endereco,
                 this.quantidade,
                 diasStr,
-                "[]",
+                this.horarios,
                 situacaoStr(),
                 this.latitude,
                 this.longitude
