@@ -114,6 +114,8 @@ public class HubInit {
                 pnlFiltro.add(tmp);
             }
         }
+        pnlFiltro.revalidate();
+        pnlFiltro.repaint();
     }
 
     private void updateLayoutUser(){
