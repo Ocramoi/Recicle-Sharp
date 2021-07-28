@@ -52,6 +52,10 @@ public class HubInit {
     private final int MIN_FIELD_SIZE = 3,
             MAX_FIELD_SIZE = 256;
 
+    /**
+     * Atualiza o histórico de pontos do usuário
+     *
+     */
     private void getHistory(){
         ResourceBundle strs = ResourceBundle.getBundle("Strings");
         ArrayList<Ponto> pontosFiltro = FuncoesDB.retornaPontos("usr", currUser.getUsr());
@@ -72,6 +76,10 @@ public class HubInit {
         }
     }
 
+    /**
+     * Atualiza a lista de pontos de coleta filtrados
+     *
+     */
     private void getFilter(){
         ResourceBundle strs = ResourceBundle.getBundle("Strings");
 
@@ -118,6 +126,11 @@ public class HubInit {
         pnlFiltro.repaint();
     }
 
+    /**
+     * Atualiza o layout da tela de perfil do usuário
+     *
+     *
+     */
     private void updateLayoutUser(){
         labelNome.setText("Olá, "+currUser.getNome()+" "+currUser.getSobrenome());
         this.frame.setTitle("Recicle # - "+currUser.getNome()+" "+currUser.getSobrenome());
@@ -130,6 +143,11 @@ public class HubInit {
         butAtualizar.setEnabled(false);
     }
 
+    /**
+     * Atualiza os dados do usuário
+     *
+     *
+     */
     private void atualizaUsuario() {
         if(!butAtualizar.isEnabled()) {
             return;
@@ -154,6 +172,12 @@ public class HubInit {
         }
     }
 
+    /**
+     * Confere as validades dos campos de informação do usuário
+     *
+     *
+     * @return booleano indicando se os campos são válidos
+     */
     private boolean confereCamposAtualizar() {
         // Confere entrada de nome
         boolean conf = (txtNome.getText().length() < MAX_FIELD_SIZE &&
@@ -173,6 +197,11 @@ public class HubInit {
         return conf;
     }
 
+    /**
+     * Realiza o cadastro de um ponto de coleta
+     *
+     * @return booleano indicando se houve sucesso
+     */
     private boolean fazCadastro() {
         String strDias = "";
         strDias += (domingoCheckBox.isSelected() ? 'S' : 'N');
@@ -207,8 +236,21 @@ public class HubInit {
         float lat = Float.parseFloat(latStr),
                 lon = Float.parseFloat(longStr);
 
+
+        System.out.printf("%s %s %s %s %s %s %s %s %s%n",
+                currUser.getUsr(),
+                tipo,
+                txtEndereco.getText(),
+                strDias,
+                horarios,
+                'P',
+                (Integer) spnPeso.getValue(),
+                lat,
+                lon
+                );
+
         boolean r = FuncoesDB.criaPonto(
-                FuncoesLogin.usuarioLocal(),
+                currUser.getUsr(),
                 tipo,
                 txtEndereco.getText(),
                 strDias,
@@ -221,12 +263,23 @@ public class HubInit {
         return r;
     }
 
+    /**
+     * Confere as validades dos campos de um ponto de coleta
+     *
+     * @return booleano indicando se os campos são válidos
+     */
     private boolean confereCampos() {
         return (txtEndereco.getText().length() > 0 &&
                 (domingoCheckBox.isSelected() || segundaFeiraCheckBox.isSelected() || tercaFeiraCheckBox.isSelected() || quartaFeiraCheckBox.isSelected() || quintaFeiraCheckBox.isSelected() || sextaFeiraCheckBox.isSelected() || sabadoCheckBox.isSelected()) &&
                 txtPosicao.getText().length() > 0);
     }
 
+    /**
+     * Inicializador da classe de Login
+     *
+     * @param frame : frame onde estão os elementos gráficos
+     * @param currUser : usuário atual que está conectado
+     */
     public HubInit(JFrame frame, Usuario currUser) {
         this.currUser = currUser;
         this.frame = frame;

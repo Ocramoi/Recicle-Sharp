@@ -9,6 +9,10 @@ public class Servidor extends Thread {
     private HttpServer server = null;
     private int PORTA = 8080;
 
+    /**
+     * Cria o servidor http
+     *
+     */
     private void criaServer() {
         try {
             server = HttpServer.create(
@@ -19,15 +23,28 @@ public class Servidor extends Thread {
         }
     }
 
+    /**
+     * Inicializador da classe de Servidor, na porta padrão de 8080
+     *
+     */
     public Servidor() {
         criaServer();
     }
 
+    /**
+     * Inicializador da classe de Servidor
+     *
+     * @param port : porta do servidor
+     */
     public Servidor(int port) {
         this.PORTA = port;
         criaServer();
     }
 
+    /**
+     * Ativa o servidor na porta salva
+     *
+     */
     @Override
     public void run() {
         assert server != null;

@@ -7,12 +7,23 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class DataHandler implements HttpHandler {
+
+    /**
+     * Lida com uma requisição http no endpoint data
+     *
+     */
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
         ArrayList<Ponto> pontos = FuncoesDB.retornaPontos("situacao", "P");
         respostaJson(httpExchange, pontos);
     }
 
+    /**
+     * Retorna json de pontos
+     *
+     * @param httpExchange : interface http
+     * @param pontos : lista com os pontos de coleta
+     */
     private void respostaJson(HttpExchange httpExchange, ArrayList<Ponto> pontos) throws IOException {
         StringBuilder respostaStr = new StringBuilder();
 

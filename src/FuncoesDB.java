@@ -9,6 +9,11 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class FuncoesDB {
+
+    /**
+     * Cria um ponto de coleta no banco de dados
+     *
+     */
     public static boolean criaPonto(String usr,
                                     char tipo,
                                     String endereco,
@@ -66,6 +71,15 @@ public class FuncoesDB {
         return ret;
     }
 
+    /**
+     * Retorna uma lista de pontos de coleta que satisfazem uma condição
+     *
+     * @param resStr : string com o comando SQL
+     * @param campo : campo no qual deve ser feita a busca
+     * @param filtro : valor do campo que deve ser buscado
+     *
+     * @return lista com os pontos de coleta
+     */
     private static ArrayList<Ponto> selectPontos(String resStr,
                                                  String campo,
                                                  String filtro) {
@@ -121,14 +135,35 @@ public class FuncoesDB {
         return pontos;
     }
 
-    public static ArrayList<Ponto> retornaPontos (String campo, String filto) {
-        return selectPontos("PONTOS_FILTRO", campo, filto);
+    /**
+     * Retorna uma lista de pontos de coleta que satisfazem uma condição
+     *
+     * @param campo : campo no qual deve ser feita a busca
+     * @param filtro : valor do campo que deve ser buscado
+     *
+     * @return lista com os pontos de coleta
+     */
+    public static ArrayList<Ponto> retornaPontos (String campo, String filtro) {
+        return selectPontos("PONTOS_FILTRO", campo, filtro);
     }
 
+    /**
+     * Retorna uma lista de todos os pontos de coleta
+     *
+     * @return lista com os pontos de coleta
+     */
     public static ArrayList<Ponto> retornaPontos () {
         return selectPontos("TODOS_PONTOS", null, null);
     }
 
+    /**
+     * Realiza o login e autenticação do usuário
+     *
+     * @param usr : nome de usuário
+     * @param pass : senha
+     *
+     * @return Usuario que fez o login
+     */
     public static Usuario loginUsuario(String usr, char[] pass) {
         // Declara nova conexão
         Connection con = null;
@@ -248,6 +283,10 @@ public class FuncoesDB {
         return ret;
     }
 
+    /**
+     * Atualiza as informações do usuário
+     *
+     */
     public static boolean atualizaUsuario(String nome,
                                           String sobre,
                                           String usr,
