@@ -96,6 +96,11 @@ public class Cadastro {
         return conf;
     }
 
+    /**
+     * Cadastra o usuário com as informações inseridas
+     *
+     * @return BigInt com hashing
+     */
     private void cadastra() {
         if(!butCad.isEnabled()){
             return;
@@ -115,6 +120,13 @@ public class Cadastro {
             lblErro.setVisible(true);
     }
 
+    /**
+     * Inicializador da classe de Cadastro
+     *
+     * @param frame : frame onde estão os elementos gráficos
+     * @param previous_panel : painel anterior
+     * @return BigInt com hashing
+     */
     public Cadastro(JFrame frame, JPanel previous_panel) {
         this.frame = frame;
         this.previous_panel = previous_panel;

@@ -11,6 +11,10 @@ public class Ponto {
             latitude,
             longitude;
 
+    /**
+     * Retorna a situação do ponto de coleta em string
+     *
+     */
     public String situacaoStr() {
         String retorno;
         switch (this.situacao) {
@@ -27,6 +31,10 @@ public class Ponto {
         return retorno;
     }
 
+    /**
+     * Retorna o tipo de material do ponto de coleta em string
+     *
+     */
     public String tipoStr() {
         String retorno;
         switch (this.tipo) {
@@ -46,6 +54,11 @@ public class Ponto {
         return retorno;
     }
 
+    /**
+     * Retorna um vetor de strings com os dias da semana nos quais um ponto de coleta está disponível
+     *
+     * @return vetor de strings
+     */
     public String[] diasStr() {
         ArrayList<String> diasFull = new ArrayList<>();
         String[] diasSemana = {
@@ -68,6 +81,10 @@ public class Ponto {
         return arRetorno;
     }
 
+    /**
+     * Inicializador da classe de Ponto
+     *
+     */
     public Ponto(String usuario,
                  String tipo,
                  String endereco,
@@ -102,6 +119,11 @@ public class Ponto {
             this.dias[i] = dias.charAt(i) == 'S';
     }
 
+    /**
+     * Cria uma representação do ponto de coleta em json
+     *
+     * @return string contendo a representação do ponto
+     */
     public String toJSON() {
         StringBuilder diasStr = new StringBuilder("[");
 

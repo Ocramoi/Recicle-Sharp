@@ -9,6 +9,11 @@ public class Usuario {
     private String sobrenome;
     private BigInteger passwordHash;
 
+    /**
+     * Inicializador da classe de Usuário, que salva as informações do banco de dados na memória
+     *
+     * @param rs : resultado de uma query SQL com os dados do usuário
+     */
     public Usuario(ResultSet rs) throws SQLException {
         this.usr = rs.getString("usr");
         this.email = rs.getString("email");

@@ -22,6 +22,10 @@ public class Login {
         return (txtUser.getText().length() > 0 && passPswrd.getPassword().length > 0);
     }
 
+    /**
+     * Faz o login do usuário com as informações no formulário
+     *
+     */
     private void logUsr() {
         if(!butLogin.isEnabled()){
             return;
@@ -66,6 +70,12 @@ public class Login {
         }
     }
 
+    /**
+     * Inicializador da classe de Login
+     *
+     * @param frame : frame onde estão os elementos gráficos
+     * @param previous_panel : painel anterior
+     */
     public Login(JFrame frame, JPanel previous_panel) {
         this.frame = frame;
 

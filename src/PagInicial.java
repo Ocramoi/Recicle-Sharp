@@ -15,6 +15,11 @@ public class PagInicial {
     private JButton loginCadastroButton;
     private static JFrame frame;
 
+    /**
+     * Faz o login na conta do usuário, caso o mesmo já tenha entrado nessa máquina
+     *
+     * @return boolean indicando se foi possível fazer o login automático
+     */
     private boolean entraConta() {
         Usuario currUser = null;
         Connection con = null;
