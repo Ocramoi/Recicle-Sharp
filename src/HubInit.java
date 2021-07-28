@@ -211,7 +211,7 @@ public class HubInit {
         strDias += (sabadoCheckBox.isSelected() ? 'S' : 'N');
 
         char tipo = ' ';
-        switch (cmbTipo.getSelectedIndex()) {
+        switch (cmbTipoInsercao.getSelectedIndex()) {
             case 0:
                 tipo = 'E';
                 break;
@@ -233,6 +233,7 @@ public class HubInit {
                 longStr = vals.split(",")[1];
         float lat = Float.parseFloat(latStr),
                 lon = Float.parseFloat(longStr);
+
 
         System.out.printf("%s %s %s %s %s %s %s %s %s%n",
                 currUser.getUsr(),
