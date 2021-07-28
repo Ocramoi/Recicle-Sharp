@@ -15,8 +15,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.*;
-import java.text.SimpleDateFormat;
 
 public class Login {
     public JPanel pnlLogin;
@@ -35,10 +33,9 @@ public class Login {
 
     /**
      * Faz o login do usuário com as informações no formulário
-     *
      */
     private void logUsr() {
-        if(!butLogin.isEnabled()){
+        if (!butLogin.isEnabled()) {
             return;
         }
         Usuario usrRegistrado = FuncoesDB.loginUsuario(txtUser.getText(), passPswrd.getPassword());
@@ -47,44 +44,14 @@ public class Login {
             return;
         }
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Timestamp curTime = new Timestamp(System.currentTimeMillis());
-        String curDate = dateFormat.format(curTime);
-
-        Connection con = null;
-        try {
-            // Conecta à database
-            con = DriverManager.getConnection("jdbc:sqlite:./Data/login.sqlite");
-            // Cria query SQL
-            Statement query = con.createStatement();
-            query.setQueryTimeout(10);
-
-            // Executa query com base nos recursos
-            try (PreparedStatement ps = con.prepareStatement("INSERT INTO login (usr, lastLogin) VALUES (?, ?)")) {
-                ps.setString(1, usrRegistrado.getUsr());
-                ps.setString(2, curDate);
-                ps.executeUpdate();
-            }
-            frame.setContentPane(new HubInit(frame,usrRegistrado).pnlHub);
-            frame.pack();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } finally {
-            // Fecha conexão à database
-            try {
-                assert con != null;
-                con.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-                lblErro.setVisible(true);
-            }
-        }
+        frame.setContentPane(new HubInit(frame, usrRegistrado).pnlHub);
+        frame.pack();
     }
 
     /**
      * Inicializador da classe de Login
      *
-     * @param frame : frame onde estão os elementos gráficos
+     * @param frame          : frame onde estão os elementos gráficos
      * @param previous_panel : painel anterior
      */
     public Login(JFrame frame, JPanel previous_panel) {
