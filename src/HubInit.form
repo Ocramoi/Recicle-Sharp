@@ -174,6 +174,8 @@
                 <rowspec value="center:max(d;4px):noGrow"/>
                 <rowspec value="top:4dlu:noGrow"/>
                 <rowspec value="center:max(d;4px):noGrow"/>
+                <rowspec value="top:4dlu:noGrow"/>
+                <rowspec value="center:max(d;4px):noGrow"/>
                 <colspec value="fill:10pt:noGrow"/>
                 <colspec value="left:4dlu:noGrow"/>
                 <colspec value="fill:d:noGrow"/>
@@ -196,7 +198,7 @@
                   </component>
                   <component id="18534" class="javax.swing.JButton" binding="btnCadastro">
                     <constraints>
-                      <grid row="24" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="26" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                       <forms/>
                     </constraints>
                     <properties>
@@ -385,6 +387,22 @@
                       </component>
                     </children>
                   </grid>
+                  <component id="4535b" class="javax.swing.JTextField" binding="txtPosicao">
+                    <constraints>
+                      <grid row="22" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <forms/>
+                    </constraints>
+                    <properties/>
+                  </component>
+                  <component id="e3a5f" class="javax.swing.JButton" binding="obterPosicaoButton">
+                    <constraints>
+                      <grid row="24" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <forms/>
+                    </constraints>
+                    <properties>
+                      <text value="Obter posição"/>
+                    </properties>
+                  </component>
                   <component id="feaef" class="javax.swing.JLabel">
                     <constraints>
                       <grid row="22" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
@@ -394,26 +412,6 @@
                       <text value="Posição no mapa"/>
                     </properties>
                   </component>
-                  <grid id="29e16" layout-manager="BorderLayout" hgap="0" vgap="0">
-                    <constraints>
-                      <grid row="22" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <forms/>
-                    </constraints>
-                    <properties/>
-                    <border type="none"/>
-                    <children>
-                      <component id="e3a5f" class="javax.swing.JButton" binding="obterPosicaoButton">
-                        <constraints border-constraint="Center"/>
-                        <properties>
-                          <text value="Obter posição"/>
-                        </properties>
-                      </component>
-                      <component id="4535b" class="javax.swing.JTextField" binding="txtPosicao">
-                        <constraints border-constraint="North"/>
-                        <properties/>
-                      </component>
-                    </children>
-                  </grid>
                 </children>
               </grid>
             </children>
