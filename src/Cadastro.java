@@ -1,3 +1,14 @@
+/**
+ * Recycle#
+ * Trabalho Final - Programação Orientada a Objetos
+ *
+ * Autores:
+ *      Eduardo Rodrigues Amaral - 11735021
+ *      Frederico Xavier Capanema - 12433364
+ *      João Marcos Cardoso da Silva - 11795314
+ *      Marco Antônio Ribeiro de Toledo - 11796419
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -71,7 +82,6 @@ public class Cadastro {
     /**
      * Confere campos de entrada para cadastro
      *
-     * @author Marco Toledo
      * @return boolean : Todos os campos estão dentro da especificação
      */
     private boolean confereCampos() {

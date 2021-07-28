@@ -1,3 +1,14 @@
+/**
+ * Recycle#
+ * Trabalho Final - Programação Orientada a Objetos
+ *
+ * Autores:
+ *      Eduardo Rodrigues Amaral - 11735021
+ *      Frederico Xavier Capanema - 12433364
+ *      João Marcos Cardoso da Silva - 11795314
+ *      Marco Antônio Ribeiro de Toledo - 11796419
+ */
+
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -235,7 +246,6 @@ public class FuncoesDB {
     /**
      * Trata entrada de campos e insere no banco de dados com tais valores.
      *
-     * @author Marco Toledo
      * @return boolean : Sucesso de inserção
      */
     public static boolean cadastroUsuario(String nome,

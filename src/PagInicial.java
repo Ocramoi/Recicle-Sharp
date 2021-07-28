@@ -1,3 +1,14 @@
+/**
+ * Recycle#
+ * Trabalho Final - Programação Orientada a Objetos
+ *
+ * Autores:
+ *      Eduardo Rodrigues Amaral - 11735021
+ *      Frederico Xavier Capanema - 12433364
+ *      João Marcos Cardoso da Silva - 11795314
+ *      Marco Antônio Ribeiro de Toledo - 11796419
+ */
+
 import javax.swing.*;
 import javax.swing.plaf.nimbus.State;
 import java.awt.*;
@@ -89,7 +100,6 @@ public class PagInicial {
     /**
      * Cria eventos de interação da página
      *
-     * @author Marco Toledo
      */
     public PagInicial() {
         new Servidor().start();
@@ -109,7 +119,6 @@ public class PagInicial {
      * Altera estilo de frame para GTK se possível, usand o primeiro estilo
      * da lista de sistema caso GTK+ não disponível.
      *
-     * @author Marco Toledo
      * @return boolean : sucesso de alteração
      */
     private static boolean iniciaEstiloUI(boolean useGTKStyleIfAvailable) {
@@ -142,7 +151,6 @@ public class PagInicial {
     /**
      * Inicializa frame de início
      *
-     * @author Marco Toledo
      * @param args : argumentos de execução
      */
     public static void main(String[] args) {

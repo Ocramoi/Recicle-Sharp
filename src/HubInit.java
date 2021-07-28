@@ -1,3 +1,14 @@
+/**
+ * Recycle#
+ * Trabalho Final - Programação Orientada a Objetos
+ *
+ * Autores:
+ *      Eduardo Rodrigues Amaral - 11735021
+ *      Frederico Xavier Capanema - 12433364
+ *      João Marcos Cardoso da Silva - 11795314
+ *      Marco Antônio Ribeiro de Toledo - 11796419
+ */
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
