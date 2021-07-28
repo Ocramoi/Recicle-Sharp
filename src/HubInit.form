@@ -29,7 +29,7 @@
                 <rowspec value="top:4dlu:noGrow"/>
                 <rowspec value="center:max(d;4px):noGrow"/>
                 <rowspec value="top:4dlu:noGrow"/>
-                <rowspec value="center:max(d;4px):noGrow"/>
+                <rowspec value="center:d:grow"/>
                 <colspec value="fill:1pt:noGrow"/>
                 <colspec value="left:4dlu:noGrow"/>
                 <colspec value="fill:d:grow"/>
@@ -51,7 +51,7 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="52ae" class="javax.swing.JButton" binding="button1" default-binding="true">
+                  <component id="52ae" class="javax.swing.JButton" binding="btn_filter">
                     <constraints>
                       <grid row="0" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                       <forms defaultalign-horz="false"/>
@@ -78,6 +78,7 @@
                       <forms/>
                     </constraints>
                     <properties>
+                      <enabled value="false"/>
                       <model>
                         <item value="..."/>
                       </model>
@@ -92,10 +93,7 @@
                       <model>
                         <item value="Nenhum"/>
                         <item value="Tipo de resíduo"/>
-                        <item value="Quantidade"/>
                         <item value="Dias"/>
-                        <item value="Situação"/>
-                        <item value="Usuário"/>
                       </model>
                       <toolTipText value="Selecione o campo de filtro"/>
                     </properties>
@@ -112,24 +110,33 @@
                       <forms defaultalign-horz="false"/>
                     </constraints>
                   </hspacer>
-                  <component id="6b8e2" class="javax.swing.JTextField" binding="txtUsr">
-                    <constraints>
-                      <grid row="2" column="2" row-span="1" col-span="11" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="-1"/>
-                      </grid>
-                      <forms defaultalign-horz="false"/>
-                    </constraints>
-                    <properties/>
-                  </component>
                   <grid id="c3296" binding="pnlPontos" layout-manager="GridBagLayout">
                     <constraints>
-                      <grid row="4" column="2" row-span="1" col-span="11" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="2" column="2" row-span="1" col-span="11" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                       <forms defaultalign-vert="false"/>
                     </constraints>
                     <properties/>
                     <border type="none"/>
                     <children/>
                   </grid>
+                  <scrollpane id="9f7b6">
+                    <constraints>
+                      <grid row="4" column="2" row-span="1" col-span="11" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <forms defaultalign-horz="false" defaultalign-vert="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none"/>
+                    <children>
+                      <grid id="f74f0" binding="pnlFiltro" layout-manager="FormLayout">
+                        <rowspec value="center:d:grow"/>
+                        <colspec value="fill:d:grow"/>
+                        <constraints/>
+                        <properties/>
+                        <border type="none"/>
+                        <children/>
+                      </grid>
+                    </children>
+                  </scrollpane>
                 </children>
               </grid>
             </children>

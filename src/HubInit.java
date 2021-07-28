@@ -16,10 +16,9 @@ public class HubInit {
     public JPanel pnlHub;
     private JTabbedPane tpnlPontos;
     private JPanel pnlButsPontos;
-    private JButton button1;
+    private JButton btn_filter;
     private JComboBox cmbTipo;
     private JComboBox cmbValor;
-    private JTextField txtUsr;
     private JPanel pnlPontos;
     private JButton btnCadastro;
     private JComboBox cmbTipoInsercao;
@@ -46,6 +45,7 @@ public class HubInit {
     private JButton butAtualizar;
     private JLabel labelNome;
     private JPanel pnlHist;
+    private JPanel pnlFiltro;
 
     private JFrame frame;
 
@@ -58,10 +58,61 @@ public class HubInit {
         Collections.reverse(pontosFiltro);
         pnlHist.setLayout(new BoxLayout(pnlHist, BoxLayout.Y_AXIS));
         pnlHist.removeAll();
+
+        if (pontosFiltro.size() == 0){
+            JLabel tmp = new JLabel("Nenhum registro encontrado.");
+            tmp.setHorizontalAlignment(SwingConstants.CENTER);
+            pnlHist.add(tmp);
+        }
+
         for(Ponto p: pontosFiltro){
             JLabel tmp = new JLabel(String.format(strs.getString("COLETA_STR"), p.endereco,p.usuario,p.tipoStr(),p.situacaoStr(), p.quantidade, String.join(", ",p.diasStr()), p.horarios, p.latitude, p.longitude));
             tmp.setHorizontalAlignment(SwingConstants.CENTER);
             pnlHist.add(tmp);
+        }
+    }
+
+    private void getFilter(){
+        ResourceBundle strs = ResourceBundle.getBundle("Strings");
+
+        int filter_column_id = cmbValor.getSelectedIndex();
+
+        ArrayList<Ponto> pontosFiltro;
+
+        int dia = -1;
+
+        switch(filter_column_id){
+            case 0:
+                pontosFiltro = FuncoesDB.retornaPontos();
+                break;
+            case 1:
+                String[] tipos = {"E", "R", "O", "C"};
+                pontosFiltro = FuncoesDB.retornaPontos("tipoResiduo", tipos[cmbTipo.getSelectedIndex()]);
+                break;
+            default:
+                dia = cmbTipo.getSelectedIndex();
+                pontosFiltro = FuncoesDB.retornaPontos();
+                break;
+        }
+
+
+
+        Collections.reverse(pontosFiltro);
+        pnlFiltro.setLayout(new BoxLayout(pnlFiltro, BoxLayout.Y_AXIS));
+        pnlFiltro.removeAll();
+
+        if (pontosFiltro.size() == 0){
+            JLabel tmp = new JLabel("Nenhum registro encontrado.");
+            tmp.setHorizontalAlignment(SwingConstants.CENTER);
+            pnlHist.add(tmp);
+        }
+
+        for(Ponto p: pontosFiltro){
+            if (dia == -1 || p.dias[dia]) {
+                JLabel tmp = new JLabel(String.format(strs.getString("COLETA_STR"), p.endereco, p.usuario, p.tipoStr(), p.situacaoStr(), p.quantidade, String.join(", ", p.diasStr()), p.horarios, p.latitude, p.longitude));
+                tmp.setHorizontalAlignment(SwingConstants.CENTER);
+                pnlFiltro.add(tmp);
+            }
         }
     }
 
@@ -200,6 +251,39 @@ public class HubInit {
             }
         });
 
+        btn_filter.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                getFilter();
+            }
+        });
+
+        cmbValor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switch(cmbValor.getSelectedIndex()){
+                    case 0:
+                        DefaultComboBoxModel<String> model_vazio = new DefaultComboBoxModel<>(new String[]{});
+                        cmbTipo.setModel(model_vazio);
+                        cmbTipo.setEnabled(false);
+                        break;
+
+                    case 1:
+                        DefaultComboBoxModel<String>model_tipo = new DefaultComboBoxModel<>(new String[] {"Eletrônico", "Reciclável", "Orgânico", "Comum"});
+                        cmbTipo.setModel(model_tipo);
+                        cmbTipo.setEnabled(true);
+                        break;
+
+                    default:
+                        DefaultComboBoxModel<String> model_dia = new DefaultComboBoxModel<>(new String[] {"Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"});
+                        cmbTipo.setModel(model_dia);
+                        cmbTipo.setEnabled(true);
+                        break;
+                }
+            }
+        });
+
         txtNome.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
@@ -235,6 +319,7 @@ public class HubInit {
                 butAtualizar.setEnabled(confereCamposAtualizar());
             }
         });
+
 
         this.spnPeso.setModel(new SpinnerNumberModel(1, 1, 100, 1));
         this.spnHora.setModel(new SpinnerNumberModel(0, 0, 23, 1));
