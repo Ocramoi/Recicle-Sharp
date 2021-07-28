@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" inheritJdk="true">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="jgoodies-forms-1.8.0.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/jgoodies-forms-1.8.0/jgoodies-forms-1.8.0.jar!/"/>
+	</lib>
+	<lib name="jgoodies-common-1.8.1.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/jgoodies-common-1.8.1/jgoodies-common-1.8.1.jar!/"/>
+	</lib>
+	<lib name="sqlite-jdbc-3.36.0.1.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/sqlite/sqlite-jdbc-3.36.0.1.jar!/"/>
+	</lib>
+	<lib name="forms_rt.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/forms_rt.jar!/"/>
+	</lib>
+</component>

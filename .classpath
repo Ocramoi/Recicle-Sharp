@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="jgoodies-forms-1.8.0/jgoodies-forms-1.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="jgoodies-common-1.8.1/jgoodies-common-1.8.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="sqlite/sqlite-jdbc-3.36.0.1.jar"/>
+	<classpathentry kind="lib" path="forms_rt.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
